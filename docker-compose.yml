@@ -1,0 +1,16 @@
+version: '3.9'
+
+networks:
+  default:
+    name: airvpn
+
+services:
+  airvpn:
+    build: .
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - ./configs/AirVPN_UDP-443.ovpn:/config.ovpn
+    restart: unless-stopped
